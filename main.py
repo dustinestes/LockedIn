@@ -1,9 +1,9 @@
-def find_minimum(nums):
-    minimum = float("inf")
-    if not nums:
-        return None
-    
-    for n in nums:
-        minimum = n if n < minimum else minimum
+def summed(nums):
+    if len(nums) == 0:
+        return 0
 
-    return minimum
+    total = 0
+    for n in nums:
+        total += n
+
+    return total
