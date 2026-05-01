@@ -1,6 +1,8 @@
-def decayed_followers(initial_followers, fraction_lost_daily, days):
-    total = initial_followers
-    for n in range(days):
-        total -= total * fraction_lost_daily
+import math
 
-    return total
+def log_scale(data, base):
+    new_list = []
+    for n in data:
+        new_list.append(math.log(n, base))
+
+    return new_list
