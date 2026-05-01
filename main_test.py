@@ -1,64 +1,42 @@
-from main import *
+from main import get_follower_prediction
 
-run_cases = [
-    ([7, 4, 3, 100, 765, 2344, 1, 2, 32], 5056),
-    ([12, 12, 12], 45),
-    ([10, 200, 3000, 5000, 4], 11333),
+TestCase = tuple[int, str, int, int]
+
+run_cases: list[TestCase] = [
+    (10, "fitness", 1, 40),
+    (10, "fitness", 2, 160),
+    (12, "cosmetic", 4, 972),
 ]
 
-submit_cases = run_cases + [
-    ([], 0),
-    ([1, 1, 1], 4),
-    ([100], 100),
-    ([50, 60, 70, 80, 90], 483),
-    ([10, 20, 30, 40, 50, 60, 70, 80, 90, 100], 872),
-    (
-        [
-            5,
-            10,
-            15,
-            20,
-            25,
-            30,
-            35,
-            40,
-            45,
-            50,
-            55,
-            60,
-            65,
-            70,
-            75,
-            80,
-            85,
-            90,
-            95,
-            100,
-        ],
-        1912,
-    ),
+submit_cases: list[TestCase] = run_cases + [
+    (15, "business", 4, 240),
+    (10, "fitness", 5, 10240),
+    (10, "fitness", 6, 40960),
+    (10, "fitness", 7, 163840),
+    (10, "fitness", 8, 655360),
+    (10, "tech", 9, 5120),
 ]
 
 
-def test(input1, expected_output):
-    try:
-        print("---------------------------------")
-        print(f"Inputs: {input1}")
-        result = round(get_estimated_spread(input1))
-        print(f"Expected: {expected_output}")
-        print(f"Actual:   {result}")
-        if result == expected_output:
-            print("Pass")
-            return True
-        print("Fail")
-        return False
-    except Exception as e:
-        print("Fail")
-        print(e)
-        return False
+def test(
+    follower_count: int, influencer_type: str, num_months: int, expected: int
+) -> bool:
+    print("---------------------------------")
+    print("Inputs:")
+    print(f" * Follower count: {follower_count}")
+    print(f" * Influencer type: {influencer_type}")
+    print(f" * Number of months: {num_months}")
+    print(f"Expected: {expected}")
+    result = get_follower_prediction(follower_count, influencer_type, num_months)
+    print(f"Actual:   {result}")
+    if result == expected:
+        print("Pass")
+        return True
+    print("Fail")
+    return False
 
 
-def main():
+def main() -> None:
     passed = 0
     failed = 0
     skipped = len(submit_cases) - len(test_cases)
@@ -78,7 +56,7 @@ def main():
         print(f"{passed} passed, {failed} failed")
 
 
-test_cases = submit_cases
+test_cases: list[TestCase] = submit_cases
 if "__RUN__" in globals():
     test_cases = run_cases
 
