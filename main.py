@@ -1,5 +1,6 @@
-def num_possible_orders(num_posts):
-    product = 1
-    for n in range(2, num_posts + 1):
-        product *= n
-    return product
+def decayed_followers(initial_followers, fraction_lost_daily, days):
+    total = initial_followers
+    for n in range(days):
+        total -= total * fraction_lost_daily
+
+    return total
