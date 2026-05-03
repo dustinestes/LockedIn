@@ -1,10 +1,7 @@
-def find_max(nums):
-    if not nums:
-        return None
+def does_name_exist(first_names, last_names, full_name):
+    for fn in first_names:
+        for ln in last_names:
+            if full_name == f"{fn} {ln}":
+                return True
     
-    highest_num = float("-inf")
-    for n in nums:
-        if n > highest_num:
-            highest_num = n
-
-    return highest_num
+    return False
