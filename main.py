@@ -1,5 +1,10 @@
-def average_followers(nums):
+def find_max(nums):
     if not nums:
         return None
     
-    return sum(nums) / len(nums)
+    highest_num = float("-inf")
+    for n in nums:
+        if n > highest_num:
+            highest_num = n
+
+    return highest_num
