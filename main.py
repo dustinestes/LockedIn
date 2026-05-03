@@ -1,5 +1,15 @@
-def find_last_name(names_dict, first_name):
-    if first_name in names_dict:
-        return names_dict[first_name]
-    
-    return None
+def binary_search(target, arr):
+    low = 0
+    high = len(arr) - 1
+
+    while low <= high:
+        median = (low + high) // 2
+
+        if arr[median] == target:
+            return True
+        elif arr[median] < target:
+            low = median + 1
+        else:
+            high = median - 1
+
+    return False
