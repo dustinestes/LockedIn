@@ -1,60 +1,32 @@
 from main import *
 
+theprimeagen = Influencer(100, 1)
+pokimane = Influencer(800, 2)
+spambot = Influencer(0, 200)
+lane = Influencer(10, 2)
+badcop = Influencer(1, 2)
+
 run_cases = [
-    ([["George", "Eva", "George"], ["Diane", "George", "Eva", "Frank"]], "George", 3),
-    (
-        [
-            ["Amy", "Bob", "Candy"],
-            ["Diane", "George", "Eva", "Frank"],
-            ["Diane", "George"],
-            ["George", "name", "George"],
-        ],
-        "George",
-        4,
-    ),
+    ([badcop, lane], [badcop, lane]),
+    ([lane, badcop, pokimane], [badcop, lane, pokimane]),
+    ([spambot, theprimeagen], [theprimeagen, spambot]),
 ]
 
 submit_cases = run_cases + [
+    ([], []),
+    ([lane], [lane]),
     (
-        [
-            ["Alex", "name", "Chloe"],
-            ["Eric", "name", "Fred"],
-            ["Hector", "name"],
-            ["Hector", "name"],
-            ["Hector", "name"],
-            ["George"],
-        ],
-        "Hector",
-        3,
+        [pokimane, theprimeagen, spambot, badcop, lane],
+        [badcop, lane, theprimeagen, pokimane, spambot],
     ),
-    (
-        [
-            ["Alex", "name", "Chloe"],
-            ["Eric", "name", "Fred"],
-            ["Hector", "name"],
-            ["Hector", "name"],
-            ["Hector", "name"],
-            ["George"],
-        ],
-        "George",
-        1,
-    ),
-    (
-        [["Alex", "name", "Chloe"], ["Eric", "name", "Fred"], ["Hector", "name"]],
-        "Alex",
-        1,
-    ),
-    ([], "George", 0),
 ]
 
 
-def test(input1, input2, expected_output):
+def test(input1, expected_output):
     print("---------------------------------")
-    print(f"Inputs:")
-    print(f" * list of lists: {input1}")
-    print(f" * target name: {input2}")
-    result = count_names(input1, input2)
+    print(f"Input:\n * {input1}")
     print(f"Expected: {expected_output}")
+    result = vanity_sort(input1)
     print(f"Actual:   {result}")
     if result == expected_output:
         print("Pass")
