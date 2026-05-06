@@ -1,18 +1,11 @@
-def quick_sort(nums, low, high):
-    if low < high:
-        middle = partition(nums, low, high)
-        quick_sort(nums, low, middle - 1)
-        quick_sort(nums, middle + 1, high)
+def selection_sort(nums):
+    for i in range(len(nums)):
+        smallest_idx = i
 
-def partition(nums, low, high):
-    pivot = nums[high]
-    i = low - 1
+        for j in range(i + 1, len(nums)):
+            if nums[j] < nums[smallest_idx]:
+                smallest_idx = j
 
-    for j in range(low, high):
-        if nums[j] < pivot:
-            i += 1
-            nums[i], nums[j] = nums[j], nums[i]
+        nums[i], nums[smallest_idx] = nums[smallest_idx], nums[i]
 
-    nums[i + 1], nums[high] = nums[high], nums[i + 1]
-
-    return i + 1
+    return nums
