@@ -1,11 +1,14 @@
-def selection_sort(nums):
-    for i in range(len(nums)):
-        smallest_idx = i
+def fib(n):
+    if n <= 1:
+        return n
+    
+    grandparent = 0
+    parent = 1
+    current = 0
 
-        for j in range(i + 1, len(nums)):
-            if nums[j] < nums[smallest_idx]:
-                smallest_idx = j
-
-        nums[i], nums[smallest_idx] = nums[smallest_idx], nums[i]
-
-    return nums
+    for x in range(n -1):
+        current = parent + grandparent
+        grandparent = parent
+        parent = current
+   
+    return current
