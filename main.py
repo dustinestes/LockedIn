@@ -1,12 +1,18 @@
-def insertion_sort(nums):
-    i = 1
+def quick_sort(nums, low, high):
+    if low < high:
+        middle = partition(nums, low, high)
+        quick_sort(nums, low, middle - 1)
+        quick_sort(nums, middle + 1, high)
 
-    while i < len(nums):
-        j = i
-        while j > 0 and nums[j - 1] > nums[j]:
-            nums[j], nums[j - 1] = nums[j - 1], nums[j]
-            j -= 1
-        
-        i += 1
+def partition(nums, low, high):
+    pivot = nums[high]
+    i = low - 1
 
-    return nums
+    for j in range(low, high):
+        if nums[j] < pivot:
+            i += 1
+            nums[i], nums[j] = nums[j], nums[i]
+
+    nums[i + 1], nums[high] = nums[high], nums[i + 1]
+
+    return i + 1
