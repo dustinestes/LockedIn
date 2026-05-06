@@ -1,62 +1,50 @@
-from main import letter_combinations
+from main import *
 
-# input; output length; first three output strings; a string that should be present
-TestCase = tuple[str, int, list[str], str]
-
-run_cases: list[TestCase] = [
-    ("", 0, [], ""),
-    ("67", 12, ["mp", "mq", "mr"], "op"),
-    ("43556", 243, ["gdjjm", "gdjjn", "gdjjo"], "hello"),
-    ("2668338", 2187, ["ammtddt", "ammtddu", "ammtddv"], "bootdev"),
+run_cases = [
+    (10, 2, 4, [10, 20, 40, 80, 160]),
+    (0, 2, 2, [0, 0, 0]),
+    (20, 2, 6, [20, 40, 80, 160, 320, 640, 1280]),
 ]
 
-submit_cases: list[TestCase] = run_cases + [
-    ("420", 0, [], "ValueError"),
-    ("7878326", 3888, ["ptptdam", "ptptdan", "ptptdao"], "rustfan"),
-    ("4568346", 2187, ["gjmtdgm", "gjmtdgn", "gjmtdgo"], "ilovego"),
+submit_cases = run_cases + [
+    (30, 3, 3, [30, 90, 270, 810]),
+    (
+        40,
+        10,
+        10,
+        [
+            40,
+            400,
+            4000,
+            40000,
+            400000,
+            4000000,
+            40000000,
+            400000000,
+            4000000000,
+            40000000000,
+            400000000000,
+        ],
+    ),
+    (10, 5, 0, [10]),
+    (1, 1, 5, [1, 1, 1, 1, 1, 1]),
 ]
 
 
-def test(
-    digits: str,
-    expected_length: int,
-    expected_initial: list[str],
-    expected_contains: str,
-) -> bool:
-    print("---------------------------------")
-    print(f"Input: '{digits}'")
-    try:
-        result = letter_combinations(digits)
-        print(f"Expected combos: {expected_length}")
-        actual_length = len(result)
-        print(f"Actual combos:   {actual_length}")
-        if expected_length == 0 and actual_length == expected_length:
-            print("Pass")
-            return True
-        print(f"Expected initial combos: {expected_initial}")
-        actual_initial = result[:3]
-        print(f"Actual initial combos:   {actual_initial}")
-        print(f"Expected to contain: '{expected_contains}'")
-        actual_contains = expected_contains in result
-        print(f"Actual contains '{expected_contains}'? {actual_contains}")
-        if (
-            actual_length == expected_length
-            and actual_initial == expected_initial
-            and actual_contains
-        ):
-            print("Pass")
-            return True
-    except ValueError as ve:
-        print(f"Caught ValueError: {ve}")
-        if expected_length == 0 and expected_contains == "ValueError":
-            print("Expected ValueError")
-            print("Pass")
-            return True
+def test(n, factor, days, expected):
+    print("-" * 40)
+    print(f"Inputs: \nn: {n}, factor: {factor}, days: {days}")
+    print(f"Expected: {expected}")
+    result = exponential_growth(n, factor, days)
+    print(f"Actual:   {result}")
+    if result == expected:
+        print("Pass")
+        return True
     print("Fail")
     return False
 
 
-def main() -> None:
+def main():
     passed = 0
     failed = 0
     skipped = len(submit_cases) - len(test_cases)
@@ -76,7 +64,7 @@ def main() -> None:
         print(f"{passed} passed, {failed} failed")
 
 
-test_cases: list[TestCase] = submit_cases
+test_cases = submit_cases
 if "__RUN__" in globals():
     test_cases = run_cases
 
