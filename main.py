@@ -1,7 +1,8 @@
-def exponential_growth(n, factor, days):
-    result = [n]
+def count_marketers(job_titles):
+    count = 0
 
-    for _ in range(days):
-        result.append(result[-1] * factor)
+    for x in job_titles:
+        if str.lower(x) == "marketer":
+            count += 1
 
-    return result
+    return count
