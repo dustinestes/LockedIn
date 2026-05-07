@@ -1,18 +1,23 @@
-from stack import Stack
+class Queue:
+    def __init__(self):
+        self.items = []
 
+    def push(self, item):
+        self.items.append(item)
 
-def is_balanced(input_str):
-    stack = Stack()
-    for item in input_str:
-        if item == "(":
-            stack.push(item)
-            continue
-        if item == ")":
-            if stack.pop() is None:
-                return False
+    def pop(self):
+        if len(self.items) == 0:
+            return None
 
+        item = self.items[0]
+        del(self.items[0])
+        return item
 
-    if stack.size() == 0:
-        return True
-    return False
+    def peek(self):
+        if len(self.items) == 0:
+            return None
+        
+        return self.items[0]
 
+    def size(self):
+        return len(self.items)
