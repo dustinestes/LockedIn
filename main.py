@@ -1,23 +1,13 @@
-class Queue:
-    def __init__(self):
-        self.items = []
+from queue import Queue
 
-    def push(self, item):
-        self.items.append(item)
 
-    def pop(self):
-        if len(self.items) == 0:
-            return None
+def matchmake(queue, user):
+    if user[1] == "leave":
+        queue.search_and_remove(user[0])
+    elif user[1] == "join":
+        queue.push(user[0])
+    print(f"---- peek: {queue.peek()}")
 
-        item = self.items[0]
-        del(self.items[0])
-        return item
-
-    def peek(self):
-        if len(self.items) == 0:
-            return None
-        
-        return self.items[0]
-
-    def size(self):
-        return len(self.items)
+    if queue.size() >= 4:
+        return f"{queue.pop()} matched {queue.pop()}!"
+    return "No match found"
