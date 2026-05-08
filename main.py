@@ -2,6 +2,19 @@ from node import Node
 
 
 class LinkedList:
+    def add_to_tail(self, node):
+        if self.head is None:
+            self.head = node
+            return
+
+        last_node = None
+        for current_node in self:
+            last_node = current_node
+        last_node.next = node
+
+
+    # don't touch below this line
+
     def __init__(self):
         self.head = None
 
@@ -11,12 +24,8 @@ class LinkedList:
             yield node
             node = node.next
 
-    # don't touch below this line
-
     def __repr__(self):
         nodes = []
-        current = self.head
-        while current and hasattr(current, "val"):
-            nodes.append(current.val)
-            current = current.next
+        for node in self:
+            nodes.append(node.val)
         return " -> ".join(nodes)
