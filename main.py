@@ -1,13 +1,12 @@
-from queue import Queue
+class Node:
+    def __init__(self, val):
+        self.val = val
+        self.next = None
 
+    def set_next(self, node):
+        self.next = node
 
-def matchmake(queue, user):
-    if user[1] == "leave":
-        queue.search_and_remove(user[0])
-    elif user[1] == "join":
-        queue.push(user[0])
-    print(f"---- peek: {queue.peek()}")
+    # don't touch below this line
 
-    if queue.size() >= 4:
-        return f"{queue.pop()} matched {queue.pop()}!"
-    return "No match found"
+    def __repr__(self):
+        return self.val
