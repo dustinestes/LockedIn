@@ -1,12 +1,12 @@
 class BSTNode:
-    def postorder(self, visited):
+    def inorder(self, visited):
         if self.left is not None:
-            self.left.postorder(visited)
+            self.left.inorder(visited)
+        
+        visited.append(self.val)
 
         if self.right is not None:
-            self.right.postorder(visited)
-
-        visited.append(self.val)
+            self.right.inorder(visited)
 
         return visited
 
