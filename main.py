@@ -1,42 +1,24 @@
-from node import Node
+class BSTNode:
+    def __init__(self, val=None):
+        self.left = None
+        self.right = None
+        self.val = val
 
-
-class LLQueue:
-    def remove_from_head(self):
-        if self.head is None:
-            return None
-        
-        to_remove = self.head
-        self.head = self.head.next
-        to_remove.set_next(None)
-
-        if self.head is None:
-            self.tail = None
-        
-        return to_remove
-
-    # don't touch below this line
-
-    def add_to_tail(self, node):
-        if self.head is None:
-            self.head = node
-            self.tail = node
+    def insert(self, val):
+        if self.val is None:
+            self.val = val
+        if self.val == val:
             return
-        self.tail.set_next(node)
-        self.tail = node
 
-    def __init__(self):
-        self.tail = None
-        self.head = None
-
-    def __iter__(self):
-        node = self.head
-        while node is not None:
-            yield node
-            node = node.next
-
-    def __repr__(self):
-        nodes = []
-        for node in self:
-            nodes.append(node.val)
-        return " <- ".join(nodes)
+        if val < self.val and self.left is None:
+            self.left = BSTNode(val)
+            return
+        if val < self.val and self.left is not None:
+            self.left.insert(val)
+            return
+        if val > self.val and self.right is None:
+            self.right = BSTNode(val)
+            return
+        if val > self.val and self.right is not None:
+            self.right.insert(val)
+            return
