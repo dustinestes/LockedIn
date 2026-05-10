@@ -1,13 +1,29 @@
 class BSTNode:
-    def get_min(self):
-        if self.left is None:
-            return self.val
-        return self.left.get_min()
+    def delete(self, val):
+        if self.val is None:
+            return None
+        
+        if val < self.val:
+            if self.left is not None:
+                self.left = self.left.delete(val)
+            return self
+            
+        if val > self.val:
+            if self.right is not None:
+                self.right = self.right.delete(val)
+            return self
 
-    def get_max(self):
-        if self.right is None:
-            return self.val
-        return self.right.get_max()
+        if val == self.val:
+            if self.right is None:
+                return self.left
+            if self.left is None:
+                return self.right
+
+            smallest_node_right = self.right.get_min()
+            self.val = smallest_node_right
+            self.right = self.right.delete(smallest_node_right)
+            return self
+            
 
     # don't touch below this line
 
@@ -35,3 +51,15 @@ class BSTNode:
             self.right.insert(val)
             return
         self.right = BSTNode(val)
+
+    def get_min(self):
+        current = self
+        while current.left is not None:
+            current = current.left
+        return current.val
+
+    def get_max(self):
+        current = self
+        while current.right is not None:
+            current = current.right
+        return current.val
