@@ -1,43 +1,47 @@
-class BSTNode:
-    def height(self):
-        if self.val is None:
-            return 0
-        
-        left_height = 0
-        right_height = 0
-
-        if self.left:
-            left_height = self.left.height()
-        
-        if self.right:
-            right_height = self.right.height()
-        
-        return 1 + max(left_height, right_height)
-        
-
-    # don't touch below this line
-
-    def __init__(self, val=None):
+class RBNode:
+    def __init__(self, val):
+        self.red = False
+        self.parent = None
+        self.val = val
         self.left = None
         self.right = None
-        self.val = val
+
+
+class RBTree:
+    def __init__(self):
+        self.nil = RBNode(None)
+        self.nil.red = False
+        self.nil.left = None
+        self.nil.right = None
+        self.root = self.nil
 
     def insert(self, val):
-        if not self.val:
-            self.val = val
-            return
+        new_node = RBNode(val)
+        new_node.left = self.nil
+        new_node.right = self.nil
+        new_node.red = True
 
-        if self.val == val:
-            return
+        parent = None
+        current = self.root
 
-        if val < self.val:
-            if self.left:
-                self.left.insert(val)
+        while current is not self.nil:
+            parent = current
+           
+            if new_node.val < current.val:
+                current = current.left
+            elif new_node.val > current.val:
+                current = current.right
+            elif new_node.val == current.val:
                 return
-            self.left = BSTNode(val)
-            return
 
-        if self.right:
-            self.right.insert(val)
-            return
-        self.right = BSTNode(val)
+        new_node.parent = parent
+
+        if parent is None:
+            self.root = new_node
+
+        else:
+            if parent.val < new_node.val:
+                parent.right = new_node
+            elif parent.val > new_node.val:
+                parent.left = new_node
+        
